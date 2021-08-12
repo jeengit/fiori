@@ -1,0 +1,219 @@
+<mvc:View controllerName="com.demo.sharjahPort.controller.customer.customerDashboardAgent" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	displayBlock="true" xmlns:core="sap.ui.core" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz="sap.viz.ui5.controls"
+	xmlns:viz.data="sap.viz.ui5.data" xmlns:unified="sap.ui.unified" xmlns:mi="sap.suite.ui.microchart"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page showHeader="true" class="sapUiResponsiveContentPadding">
+		<customHeader>
+			<core:Fragment fragmentName="com.demo.sharjahPort.view.fragments.TopNav" type="XML"/>
+		</customHeader>
+		<content>
+			<VBox class="section">
+				<Title text="Dashboard" class="heading"/>
+				<FlexBox width="100%" class="sapUiSmallMarginTopBottom custTile">
+					<HBox width="16.6%" class="tileLayout sapUiSmallMarginEnd">
+						<GenericTile ariaLabel="NEW/ETA" press="onNavToPress" header="{i18n>etaReq}" subheader="{i18n>subReq}">
+							<tileContent>
+								<TileContent>
+									<content>
+										<mi:ComparisonMicroChart minValue="0" maxValue="{= ${DashboardCountModel>/0/EtaRequested} > ${DashboardCountModel>/0/EtaApproved} &amp;&amp; ${DashboardCountModel>/0/EtaRejected} ? 
+										${DashboardCountModel>/0/EtaRequested} : ${DashboardCountModel>/0/EtaApproved} > ${DashboardCountModel>/0/EtaRequested} &amp;&amp; ${DashboardCountModel>/0/EtaRejected} ? 
+										${DashboardCountModel>/0/EtaApproved} : ${DashboardCountModel>/0/EtaRejected}}">
+											<mi:data>
+												<mi:ComparisonMicroChartData title="New" value="{DashboardCountModel>/0/EtaRequested}" color="#f5c11a"/>
+												<mi:ComparisonMicroChartData title="Approved" value="{DashboardCountModel>/0/EtaApproved}" color="Good"/>
+												<mi:ComparisonMicroChartData title="Rejected" value="{DashboardCountModel>/0/EtaRejected}" color="Error"/>
+											</mi:data>
+										</mi:ComparisonMicroChart>
+									</content>
+								</TileContent>
+							</tileContent>
+						</GenericTile>
+					</HBox>
+					<HBox width="16.6%" class="tileLayout sapUiSmallMarginEnd">
+						<GenericTile class="sapUiSmallMarginBottom" header="{i18n>PortClearance}" subheader="{i18n>subPcReq}">
+							<tileContent>
+								<TileContent>
+									<content>
+										<mi:ComparisonMicroChart minValue="0" maxValue="{= ${DashboardCountModel>/0/PortCRequested} > ${DashboardCountModel>/0/PortCApproved} &amp;&amp; ${DashboardCountModel>/0/PortCRejected} ? 
+										${DashboardCountModel>/0/PortCRequested} : ${DashboardCountModel>/0/PortCApproved} > ${DashboardCountModel>/0/PortCRequested} &amp;&amp; ${DashboardCountModel>/0/PortCRejected} ? 
+										${DashboardCountModel>/0/PortCApproved} : ${DashboardCountModel>/0/PortCRejected}}">
+											<mi:data>
+												<mi:ComparisonMicroChartData title="New" value="{DashboardCountModel>/0/PortCRequested}" color="#f5c11a"/>
+												<mi:ComparisonMicroChartData title="Approved" value="{DashboardCountModel>/0/PortCApproved}" color="Good"/>
+												<mi:ComparisonMicroChartData title="Rejected" value="{DashboardCountModel>/0/PortCRejected}" color="Error"/>
+											</mi:data>
+										</mi:ComparisonMicroChart>
+									</content>
+								</TileContent>
+							</tileContent>
+						</GenericTile>
+					</HBox>
+					<HBox width="16.6%" class="tileLayout sapUiSmallMarginEnd">
+						<GenericTile class="" header="{i18n>PaymentList}">
+							<TileContent unit="" footer="5"></TileContent>
+						</GenericTile>
+					</HBox>
+					<HBox width="16.6%" class="tileLayout sapUiSmallMarginEnd">
+						<GenericTile ariaLabel="OPEN/HOTWORKS" press="onNavToPress" class="sapUiSmallMarginBottom" header="Service request" subheader="{i18n>subServ}">
+							<tileContent>
+								<TileContent>
+									<content>
+										<mi:ComparisonMicroChart minValue="0" maxValue="{= ${DashboardCountModel>/0/ServiceRequested} > ${DashboardCountModel>/0/ServiceApproved} &amp;&amp; ${DashboardCountModel>/0/ServiceRejected} ? 
+										${DashboardCountModel>/0/ServiceRequested} : ${DashboardCountModel>/0/ServiceApproved} > ${DashboardCountModel>/0/ServiceRequested} &amp;&amp; ${DashboardCountModel>/0/ServiceRejected} ? 
+										${DashboardCountModel>/0/ServiceApproved} : ${DashboardCountModel>/0/ServiceRejected}}">
+											<mi:data>
+												<mi:ComparisonMicroChartData title="New" value="{DashboardCountModel>/0/ServiceRequested}" color="#f5c11a"/>
+												<mi:ComparisonMicroChartData title="Approved" value="{DashboardCountModel>/0/ServiceApproved}" color="Good"/>
+												<mi:ComparisonMicroChartData title="Rejected" value="{DashboardCountModel>/0/ServiceRejected}" color="Error"/>
+											</mi:data>
+										</mi:ComparisonMicroChart>
+									</content>
+								</TileContent>
+							</tileContent>
+						</GenericTile>
+					</HBox>
+				<HBox width="16.6%" class="tileLayout sapUiSmallMarginEnd">
+						<GenericTile class="sapUiSmallMarginBottom" width="100%" press="handleListPress" ariaLabel="list/GATEPASS" header="Gate Pass">
+							<tileContent>
+								<TileContent>
+									<content>
+										<mi:ComparisonMicroChart minValue="0" maxValue="{DashboardCountModel>/0/GatePassOpen}">
+											<mi:data>
+												<mi:ComparisonMicroChartData title="New" value="{DashboardCountModel>/0/GatePassOpen}" color="#f5c11a"/>
+											</mi:data>
+										</mi:ComparisonMicroChart>
+									</content>
+								</TileContent>
+							</tileContent>
+						</GenericTile>
+					</HBox>
+						<HBox width="16.6%" class="tileLayout sapUiSmallMarginEnd">
+						<GenericTile class="sapUiSmallMarginBottom" width="100%" press="handleListPress" ariaLabel="AGENT/AGENTMANIFEST" header="Manifest">
+								<TileContent>
+									<content>
+										<mi:ComparisonMicroChart minValue="0" maxValue="{= ${DashboardCountModel>/0/AgManifestOpen} > ${DashboardCountModel>/0/AgManifestApproved} &amp;&amp; ${DashboardCountModel>/0/AgManifestRejected} ? 
+										${DashboardCountModel>/0/AgManifestOpen} : ${DashboardCountModel>/0/AgManifestApproved} > ${DashboardCountModel>/0/AgManifestOpen} &amp;&amp; ${DashboardCountModel>/0/AgManifestRejected} ? 
+										${DashboardCountModel>/0/AgManifestApproved} : ${DashboardCountModel>/0/AgManifestRejected}}">
+											<mi:data>
+												<mi:ComparisonMicroChartData title="New" value="{DashboardCountModel>/0/AgManifestOpen}" color="#f5c11a"/>
+												<mi:ComparisonMicroChartData title="Approved" value="{DashboardCountModel>/0/AgManifestApproved}" color="Good"/>
+												<mi:ComparisonMicroChartData title="Rejected" value="{DashboardCountModel>/0/AgManifestRejected}" color="Error"/>
+											</mi:data>
+										</mi:ComparisonMicroChart>
+									</content>
+								</TileContent>
+						</GenericTile>
+					</HBox>
+				</FlexBox>
+				<FlexBox width="100%">
+					<HBox width="33.3%" class="chart">
+						<viz:Popover id="idPopOver"></viz:Popover>
+						<viz:VizFrame vizProperties="{ title: {text : 'ETA Summary', visible : true},plotArea:{ dataLabel:{visible: true,type:'value'} }}"
+							id="idVizFrame" uiConfig="{applicationSet:'fiori'}" vizType='donut' width="100%" height="300px" class="box-shadow bg-light sapUiSmallMarginEnd">
+							<viz:dataset>
+								<viz.data:FlattenedDataset data="{pieChartModel>/results}">
+									<viz.data:dimensions>
+										<viz.data:DimensionDefinition name="Status" value="{pieChartModel>status}"/>
+									</viz.data:dimensions>
+									<viz.data:measures>
+										<viz.data:MeasureDefinition name="Count" value="{pieChartModel>count}"/>
+									</viz.data:measures>
+								</viz.data:FlattenedDataset>
+							</viz:dataset>
+							<viz:feeds>
+								<viz.feeds:FeedItem uid="size" type="Measure" values="Count"/>
+								<viz.feeds:FeedItem uid="color" type="Dimension" values="Status"/>
+							</viz:feeds>
+						</viz:VizFrame>
+					</HBox>
+				</FlexBox>
+			</VBox>
+			<!--<VBox class="section">-->
+			<!--<FlexBox width="100%">-->
+			<!--<HBox width="20%">-->
+			<!--<t:Table class="sapUiSmallMarginEnd card tableCard" rows="{etaTable>/results}" selectionMode="None" visibleRowCount="3" paste="onPaste" ariaLabelledBy="title">-->
+			<!--		<t:extension>-->
+			<!--			<OverflowToolbar style="Clear">-->
+			<!--				<Title text="ETA"/>-->
+			<!--			</OverflowToolbar>-->
+			<!--		</t:extension>-->
+			<!--		<t:columns>-->
+			<!--			<t:Column width="9rem">-->
+			<!--				<Label text="Ship"/>-->
+			<!--				<t:template>-->
+			<!--					<Text text="{etaTable>ship}" wrapping="false"/>-->
+			<!--				</t:template>-->
+			<!--			</t:Column>-->
+			<!--			<t:Column>-->
+			<!--				<Label text="Time"/>-->
+			<!--				<t:template>-->
+			<!--					<Text text="{etaTable>time}" wrapping="false"/>-->
+			<!--				</t:template>-->
+			<!--			</t:Column>-->
+			<!--		</t:columns>-->
+			<!--	</t:Table>-->
+			<!--</HBox>-->
+			<!--<HBox width="40%">-->
+			<!--	<t:Table class="sapUiSmallMarginEnd card tableCard" rows="{anchorTable>/results}" selectionMode="None" visibleRowCount="3" paste="onPaste" ariaLabelledBy="title">-->
+			<!--		<t:extension>-->
+			<!--			<OverflowToolbar style="Clear">-->
+			<!--				<Title text="ANCHORAGE"/>-->
+			<!--			</OverflowToolbar>-->
+			<!--		</t:extension>-->
+			<!--		<t:columns>-->
+			<!--			<t:Column>-->
+			<!--				<Label text="Vessel"/>-->
+			<!--				<t:template>-->
+			<!--					<Text text="{anchorTable>ship}" wrapping="false"/>-->
+			<!--				</t:template>-->
+			<!--			</t:Column>-->
+			<!--			<t:Column>-->
+			<!--				<Label text="Agent"/>-->
+			<!--				<t:template>-->
+			<!--					<Text text="{anchorTable>agent}" wrapping="false"/>-->
+			<!--				</t:template>-->
+			<!--			</t:Column>-->
+			<!--			<t:Column>-->
+			<!--				<Label text="Status"/>-->
+			<!--				<t:template>-->
+			<!--					<Text text="{anchorTable>status}" wrapping="false"/>-->
+			<!--				</t:template>-->
+			<!--			</t:Column>-->
+			<!--		</t:columns>-->
+			<!--	</t:Table>-->
+			<!--	</HBox>-->
+			<!--	<HBox width="40%">-->
+			<!--	<t:Table class="card tableCard" rows="{harbourTable>/results}" selectionMode="None" visibleRowCount="3" paste="onPaste" ariaLabelledBy="title">-->
+			<!--		<t:extension>-->
+			<!--			<OverflowToolbar style="Clear">-->
+			<!--				<Title text="HARBOUR MASTER"/>-->
+			<!--			</OverflowToolbar>-->
+			<!--		</t:extension>-->
+			<!--		<t:columns>-->
+			<!--			<t:Column>-->
+			<!--				<Label text="Vessel"/>-->
+			<!--				<t:template>-->
+			<!--					<Text text="{harbourTable>ship}" wrapping="false"/>-->
+			<!--				</t:template>-->
+			<!--			</t:Column>-->
+			<!--			<t:Column>-->
+			<!--				<Label text="Berth Allotted"/>-->
+			<!--				<t:template>-->
+			<!--					<Text text="{harbourTable>berth}" wrapping="false"/>-->
+			<!--				</t:template>-->
+			<!--			</t:Column>-->
+			<!--			<t:Column>-->
+			<!--				<Label text="Instructions"/>-->
+			<!--				<t:template>-->
+			<!--					<Text text="{harbourTable>status}" wrapping="false"/>-->
+			<!--				</t:template>-->
+			<!--			</t:Column>-->
+			<!--		</t:columns>-->
+			<!--	</t:Table>-->
+			<!--	</HBox>-->
+			<!--</FlexBox>-->
+			<!--</VBox>-->
+		</content>
+	</Page>
+</mvc:View>

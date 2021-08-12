@@ -1,0 +1,326 @@
+<core:FragmentDefinition xmlns:t="sap.ui.table" xmlns="sap.uxap" xmlns:m="sap.m" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core"
+	xmlns:tnt="sap.tnt">
+	<ObjectPageLayout upperCaseAnchorBar="false" id="manifestChangeId" class="objLayoutClass editMode">
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle>
+				<breadcrumbs>
+					<m:Breadcrumbs currentLocationText="Create Manifest">
+						<m:Link href="#dashboardAgent" text="Home"/>
+						<!--<m:Link href="#manifest={navModel>/status}&amp;type='{navModel>/type}'" text="Manifest List"/>-->
+					</m:Breadcrumbs>
+				</breadcrumbs>
+				<expandedHeading>
+					<m:HBox>
+						<m:Title text="{ManDetailsModel>/VesselName} - {ManDetailsModel>/ManifestNo}" wrapping="true"/>
+					</m:HBox>
+				</expandedHeading>
+				<snappedHeading>
+					<m:FlexBox fitContainer="true" alignItems="Center">
+						<m:Avatar backgroundColor="Accent9" src="images/cargo-ship.png" class="sapUiTinyMarginEnd"/>
+						<m:Title text="{ManDetailsModel>/VesselName} - {ManDetailsModel>/ManifestNo}" wrapping="true"/>
+					</m:FlexBox>
+				</snappedHeading>
+				<expandedContent>
+					<m:Text text="Manifest"/>
+				</expandedContent>
+				<snappedContent>
+					<m:Text text="Manifest"/>
+				</snappedContent>
+				<snappedTitleOnMobile>
+					<m:Title text="Header Title On Phone"/>
+				</snappedTitleOnMobile>
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+		<headerContent>
+			<m:FlexBox wrap="Wrap">
+				<m:Avatar class="sapUiSmallMarginEnd" backgroundColor="Accent9" src="images/cargo-ship.png" displaySize="L"/>
+				<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+					<m:VBox class=" sapUiSmallMarginBottom">
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox width="40%">
+								<m:Label text="External Manifest no."/>
+							</m:HBox>
+							<m:HBox width="60%">
+								<m:Input value="{inCreateModel>/ManifestExt}" id="extManid"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox width="40%">
+								<m:Label text="{i18n>manNo}" class="sapUiSmallMarginEnd"/>
+							</m:HBox>
+							<m:HBox width="60%">
+								<m:Input value="{ManDetailsModel>/ManifestNo}" editable="false"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox width="40%">
+								<m:Label text="To Port" class="sapUiSmallMarginEnd"/>
+							</m:HBox>
+							<m:HBox width="60%">
+								<m:Input value="{ManDetailsModel>/ToPort}"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox width="40%">
+								<m:Label text="From Port" class="sapUiSmallMarginEnd"/>
+							</m:HBox>
+							<m:HBox width="60%">
+								<m:Input value="{ManDetailsModel>/FromPort}"/>
+							</m:HBox>
+						</m:HBox>
+							<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox width="40%">
+								<m:Label text="Type" class="sapUiSmallMarginEnd"/>
+							</m:HBox>
+							<m:HBox width="60%">
+								<m:Input value="{ManDetailsModel>/ManifestType}"/>
+							</m:HBox>
+						</m:HBox>
+					</m:VBox>
+				</layout:VerticalLayout>
+				<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+					<m:VBox class=" sapUiSmallMarginBottom">
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox width="40%">
+								<m:Label text="{i18n>Callsign}"/>
+							</m:HBox>
+							<m:HBox width="60%">
+								<!--<m:Input value="{ManDetailsModel>/Callsign}"/>-->
+								<m:Input class="" value="{ManDetailsModel>/Callsign}" id="callSignInputId" showSuggestion="true" suggestionItemSelected="selectCallSign"
+									suggest="searchCallSignData" autocomplete="false" suggestionItems="{callsignModel>/results}">
+									<m:suggestionItems>
+										<core:Item key="{callsignModel>CallSign}" text="{callsignModel>CallSign}"/>
+									</m:suggestionItems>
+								</m:Input>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox width="40%">
+								<m:Label text="{i18n>ArrivalDate}"/>
+							</m:HBox>
+							<m:HBox width="60%">
+								<m:DatePicker value="{ManDetailsModel>/ArrivalDate}" valueFormat="yyyyMMdd" displayFormat="long" editable="false"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox width="40%">
+								<m:Label text="{i18n>crtDate}"/>
+							</m:HBox>
+							<m:HBox width="60%">
+								<m:DatePicker value="{ManDetailsModel>/CreationDate}" editable="false" valueFormat="yyyyMMdd" displayFormat="long"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox width="40%">
+								<m:Label text="{i18n>Agentcode}"/>
+							</m:HBox>
+							<m:HBox width="60%">
+								<m:Input value="{callsigndetModel>/AgentCode}" id="agentCode" editable="false" wrapping="false"/>
+							</m:HBox>
+						</m:HBox>
+					</m:VBox>
+				</layout:VerticalLayout>
+				<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+					<m:VBox class=" sapUiSmallMarginBottom">
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox width="40%">
+								<m:Label text="{i18n>PortName}"/>
+							</m:HBox>
+							<m:HBox width="60%">
+								<m:Input value="{ManDetailsModel>/PortName}" wrapping="false"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox width="40%">
+								<m:Label text="{i18n>voyNo}"/>
+							</m:HBox>
+							<m:HBox width="60%">
+								<m:Input value="{ManDetailsModel>/VoyageNumber}"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox width="40%">
+								<m:Label text="{i18n>Captain}" class="sapUiSmallMarginEnd"/>
+							</m:HBox>
+							<m:HBox width="60%">
+								<m:Input value="{ManDetailsModel>/Caption}"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox width="40%">
+								<m:Label text="{i18n>VesselName}"/>
+							</m:HBox>
+							<m:HBox width="60%">
+								<m:Input value="{callsigndetModel>/VesselName}" id="vesselname" editable="false"/>
+							</m:HBox>
+						</m:HBox>
+					</m:VBox>
+				</layout:VerticalLayout>
+			</m:FlexBox>
+		</headerContent>
+		<sections>
+			<ObjectPageSection titleUppercase="false" showTitle="false" title="{i18n>billEntry}">
+				<subSections>
+					<ObjectPageSubSection titleUppercase="false">
+						<blocks>
+							<m:FlexBox width="100%" class="manifestListClass boeDetailsClass">
+								<m:HBox width="30%" class="boeMaster">
+									<m:List id="changeList" class="tableCard card" items="{path : 'ManDetModel>/BillOfEntrySet/results'}"  headerText="Manifest - Import"
+										noDataText="{i18n>emptyNodata}">
+										<m:CustomListItem type="Active" press="handelListPress">
+											<m:FlexBox alignItems="Start" justifyContent="SpaceBetween">
+												<m:HBox><core:Icon color="#CEA95B" class="sapUiTinyMarginEnd" size="1rem" src="sap-icon://activities"/>
+													<m:Text text="{ManDetModel>BENo} - {ManDetModel>ConsigneeCode}"/>
+												</m:HBox>
+												<!--	<tnt:InfoLabel visible="{= ${BOEDetailsModel>Status} === '' ? false : true}" text="{BOEDetailsModel>Status}" displayOnly="true"-->
+												<!--		colorScheme="{= ${BOEDetailsModel>Status} === 'OPEN' ? 8 : ${BOEDetailsModel>Status} === 'IN PROGRESS' ? 3 : 5 }"/>-->
+											</m:FlexBox>
+											<m:FlexBox alignItems="Start" justifyContent="SpaceBetween">
+												<m:Text class="desc" text="{ManDetailsModel>CargoCategory}"/>
+												<m:Text class="desc sapMLnk"
+													text="{ path: 'ManDetailsModel>ArrivalDate', type: 'sap.ui.model.type.Date', formatOptions: {source: {pattern: 'dd/MM/yyyy'}} }"
+													wrapping="false"/>
+											</m:FlexBox>
+										</m:CustomListItem>
+										<m:headerToolbar>
+											<m:Toolbar>
+												<m:Title text="Bill of Entry" level="H1"/>
+											</m:Toolbar>
+										</m:headerToolbar>
+										<m:layoutData>
+											<m:FlexItemData growFactor="1"/>
+										</m:layoutData>
+									</m:List>
+								</m:HBox>
+								<m:HBox width="70%" class="boeDetails">
+									<m:FlexBox wrap="Wrap" width="100%">
+										<m:List id="changeDetails" class="tableCard card" items="">
+											<m:items>
+												<m:CustomListItem class="sapUiSmallMarginTop">
+													<m:content>
+														<layout:VerticalLayout>
+															<m:VBox class="sapUiSmallMarginBottom sapUiSmallMarginEnd">
+																<m:HBox class="sapUiTinyMarginBottom">
+																	<m:Label text="Bill of Lading" class="sapUiSmallMarginEnd"/>
+																	<m:Input value="{ManDetailsModel>/BillOfLading}"/>
+																</m:HBox>
+																<m:HBox class="sapUiTinyMarginBottom">
+																	<m:Label text="Consignee Code" class="sapUiSmallMarginEnd"/>
+																	<m:Input value="{ManDetailsModel>/ConsigneeCode}"/>
+																</m:HBox>
+																<m:HBox class="sapUiTinyMarginBottom">
+																	<m:Label text="Bill of Entry" class="sapUiSmallMarginEnd"/>
+																	<m:Input value="{ManDetailsModel>/BillOfEntry}" editable="false"/>
+																</m:HBox>
+																<m:HBox class="sapUiTinyMarginBottom">
+																	<m:Label text="Contry of origin" class="sapUiSmallMarginEnd"/>
+																	<m:Input value="{ManDetailsModel>/CountryOfOrigin}"/>
+																</m:HBox>
+															</m:VBox>
+														</layout:VerticalLayout>
+														<layout:VerticalLayout>
+															<m:VBox class="sapUiSmallMarginBottom sapUiSmallMarginEnd">
+																<m:HBox class="sapUiTinyMarginBottom">
+																	<m:Label text="Consignee" class="sapUiSmallMarginEnd"/>
+																	<m:Input value="{ManDetailsModel>/Consignee}"/>
+																</m:HBox>
+																<m:HBox class="sapUiTinyMarginBottom">
+																	<m:Label text="Creation Date" class="sapUiSmallMarginEnd"/>
+																	<m:Input value="{ManDetailsModel>/CreationDate}" editable="false"/>
+																</m:HBox>
+																<m:VBox class="sapUiSmallMarginBottom">
+																	<m:HBox class="sapUiTinyMarginBottom">
+																		<m:Label text="Cargo category" class="sapUiSmallMarginEnd"/>
+																		<m:Input value="{ManDetailsModel>/CargoCategory}"/>
+																	</m:HBox>
+																</m:VBox>
+															</m:VBox>
+														</layout:VerticalLayout>
+														<!--<layout:VerticalLayout>-->
+														<!--</layout:VerticalLayout>-->
+														<t:Table visibleRowCount="6" rows="{ManDetailsModel>/AgentCommoditiesSet}" selectionMode="None" ariaLabelledBy="title">
+															<t:columns>
+																<t:Column width="130px" sortProperty="ManifestNo">
+																	<m:Label wrapping="false" text="Commodities"/>
+																	<t:template>
+																		<m:Text text="{ManDetailsModel>Commodities}"/>
+																	</t:template>
+																</t:Column>
+																<t:Column>
+																	<m:Label text="Mark &amp; No"/>
+																	<t:template>
+																		<m:Text text="{ManDetailsModel>MarkAndNumbers} - {BOEDetailsModel>NoOfPackages}"/>
+																	</t:template>
+																</t:Column>
+																<t:Column>
+																	<m:Label text="UOM"/>
+																	<t:template>
+																		<m:Text text="{ManDetailsModel>UOM}"/>
+																	</t:template>
+																</t:Column>
+																<t:Column>
+																	<m:Label text="No.of packages"/>
+																	<t:template>
+																		<m:Text text="{ManDetailsModel>NoOfPackages}"/>
+																	</t:template>
+																</t:Column>
+																<t:Column>
+																	<m:Label text="Pakage Type"/>
+																	<t:template>
+																		<m:Text text="{ManDetailsModel>PackageType}"/>
+																	</t:template>
+																</t:Column>
+																<t:Column>
+																	<m:Label text="Sub Type"/>
+																	<t:template>
+																		<m:Text text="{ManDetailsModel>SubType}"/>
+																	</t:template>
+																</t:Column>
+																<t:Column>
+																	<m:Label text="GrossWt"/>
+																	<t:template>
+																		<m:Text text="{ManDetailsModel>GrowsWt}"/>
+																	</t:template>
+																</t:Column>
+																<t:Column>
+																	<m:Label text="CBM"/>
+																	<t:template>
+																		<m:Text text="{ManDetailsModel>CBM}"/>
+																	</t:template>
+																</t:Column>
+																<t:Column>
+																	<m:Label text="Charge / Ton"/>
+																	<t:template>
+																		<m:Text text="{ManDetailsModel>ChargeTon}"/>
+																	</t:template>
+																</t:Column>
+																<t:Column>
+																	<m:Label text="Net Weight"/>
+																	<t:template>
+																		<m:Text text="{ManDetailsModel>NetWt}"/>
+																	</t:template>
+																</t:Column>
+															</t:columns>
+														</t:Table>
+													</m:content>
+												</m:CustomListItem>
+											</m:items>
+											<m:headerToolbar>
+												<m:Toolbar>
+													<m:Title text="Bill of Lading" level="H1"/>
+												</m:Toolbar>
+											</m:headerToolbar>
+											<m:layoutData>
+												<m:FlexItemData growFactor="1"/>
+											</m:layoutData>
+										</m:List>
+									</m:FlexBox>
+								</m:HBox>
+							</m:FlexBox>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+	</ObjectPageLayout>
+</core:FragmentDefinition>

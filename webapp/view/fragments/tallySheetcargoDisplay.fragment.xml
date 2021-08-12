@@ -1,0 +1,580 @@
+<core:FragmentDefinition xmlns:t="sap.ui.table" xmlns="sap.uxap" xmlns:m="sap.m" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core">
+	<ObjectPageLayout upperCaseAnchorBar="false" id="tallyCargoDispId" class="objLayoutClass editMode">
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle>
+				<breadcrumbs>
+					<m:Breadcrumbs currentLocationText="Tally Sheet">
+						<m:Link href="{= ${loginModel>/uRole} === 'HARBOR_MASTER' ? '#dashboardHarbour' : ${loginModel>/uRole} === 'CONTROL_ROOM' ? '#dashboard' : ${loginModel>/uRole} === 'CARGO' ? '#dashboardManifest' : ${loginModel>/uRole} === 'TALLYCLERK' ? '#tallySheetClerkList' : '#dashboardAgent'}" text="Home"/>
+					</m:Breadcrumbs>
+				</breadcrumbs>
+				<expandedHeading>
+					<m:HBox>
+						<m:Title text="{tSDetailModel>/TallySheetCode}" wrapping="true"/>
+					</m:HBox>
+				</expandedHeading>
+				<snappedHeading>
+					<m:FlexBox fitContainer="true" alignItems="Center">
+						<m:Avatar backgroundColor="Accent9" src="images/cargo-ship.png" class="sapUiTinyMarginEnd"/>
+						<m:Title text="{tSDetailModel>/tallyCode}" wrapping="true"/>
+					</m:FlexBox>
+				</snappedHeading>
+				<expandedContent>
+					<m:Text text="Tally Sheet"/>
+				</expandedContent>
+				<snappedContent>
+					<m:Text text="Tally Sheet"/>
+				</snappedContent>
+				<snappedTitleOnMobile>
+					<m:Title text="Header Title On Phone"/>
+				</snappedTitleOnMobile>
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+		<headerContent>
+			<m:FlexBox wrap="Wrap">
+				<m:Avatar class="sapUiSmallMarginEnd" backgroundColor="Accent9" src="images/cargo-ship.png" displaySize="L"/>
+				<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+					<m:VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox class="sapUiTinyMarginEnd">
+								<m:Label text="{i18n>tallyCode}"/>
+							</m:HBox>
+							<m:HBox>
+								<m:Text text="{tSDetailModel>/TallySheetCode}"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox class="sapUiTinyMarginEnd">
+								<m:Label text="{i18n>PortName}"/>
+							</m:HBox>
+							<m:HBox>
+								<m:Text text="{tSDetailModel>/PortName}"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox width="40%" class="sapUiTinyMarginEnd">
+								<m:Label text="{i18n>manNo}"/>
+							</m:HBox>
+							<m:HBox width="60%">
+								<m:Text text="{tSDetailModel>/ManifestNo}"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox alignItems="Center" class="sapUiTinyMarginBottom">
+							<m:HBox width="40%" class="sapUiTinyMarginEnd">
+								<m:Label text="{i18n>ConsigneeCode}"/>
+							</m:HBox>
+							<m:HBox width="60%">
+								<m:Text text="{tSDetailModel>/ConsigneeCode}"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox alignItems="Center" class="sapUiTinyMarginBottom">
+							<m:HBox width="40%" class="sapUiTinyMarginEnd">
+								<m:Label text="{i18n>portOrg}"/>
+							</m:HBox>
+							<m:HBox >
+								<m:Text text="{tSDetailModel>/PortOfShipment}"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox alignItems="Center" class="sapUiTinyMarginBottom">
+							<m:HBox class="sapUiTinyMarginEnd">
+								<m:Label text="Completed "/>
+							</m:HBox>
+							<m:HBox >
+								<m:Text text="{tSDetailModel>/CargoCategory}"/>
+							</m:HBox>
+						</m:HBox>
+					</m:VBox>
+				</layout:VerticalLayout>
+				<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+					<m:VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox class="sapUiTinyMarginEnd">
+								<m:Label text="{i18n>ArrivalDate}"/>
+							</m:HBox>
+							<m:HBox >
+								<m:Text text="{tSDetailModel>/ArrivalDate}"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox alignItems="Center" class="sapUiTinyMarginBottom">
+							<m:HBox class="sapUiTinyMarginEnd">
+								<m:Label text="B/L no"/>
+							</m:HBox>
+							<m:HBox >
+								<m:Text text="{tSDetailModel>/BLNo}"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox class="sapUiTinyMarginEnd">
+								<m:Label text="{i18n>crtDate}"/>
+							</m:HBox>
+							<m:HBox >
+								<m:Text text="{tSDetailModel>/CreationDate}"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox class="sapUiTinyMarginEnd">
+								<m:Label text="{i18n>Agentcode}"/>
+							</m:HBox>
+							<m:HBox >
+								<m:Text text="{tSDetailModel>/AgentCode}"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox class="sapUiTinyMarginEnd">
+								<m:Label text="{i18n>b/ldate}"/>
+							</m:HBox>
+							<m:HBox >
+								<m:Text text="{tSDetailModel>/BLDate}"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox alignItems="Center">
+							<m:HBox class="sapUiTinyMarginEnd">
+								<m:Label text="Grand Total"/>
+							</m:HBox>
+							<m:HBox >
+								<m:Text text="{tSDetailModel>/GrandTotal}"/>
+							</m:HBox>
+						</m:HBox>
+					</m:VBox>
+				</layout:VerticalLayout>
+				<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+					<m:VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox class="sapUiTinyMarginEnd">
+								<m:Label text="{i18n>portDis}"/>
+							</m:HBox>
+							<m:HBox >
+								<m:Text text="{tSDetailModel>/PortOfDischarge}"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox class="sapUiTinyMarginEnd">
+								<m:Label text="Voyage number"/>
+							</m:HBox>
+							<m:HBox >
+								<m:Text text="{tSDetailModel>/VoyageNumber}"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox class="sapUiTinyMarginEnd">
+								<m:Label text="VRN no"/>
+							</m:HBox>
+							<m:HBox >
+								<m:Text text="{tSDetailModel>/VRNNo}"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox class="sapUiTinyMarginBottom" alignItems="Center">
+							<m:HBox class="sapUiTinyMarginEnd">
+								<m:Label text="Agent name"/>
+							</m:HBox>
+							<m:HBox >
+								<m:Text text="{tSDetailModel>/AgentName}"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox alignItems="Center" class="sapUiTinyMarginBottom">
+							<m:HBox class="sapUiTinyMarginEnd">
+								<m:Label text="Consignee name"/>
+							</m:HBox>
+							<m:HBox >
+								<m:Text text="{tSDetailModel>/ConsigneeName}"/>
+							</m:HBox>
+						</m:HBox>
+						<m:HBox alignItems="Center">
+							<m:HBox class="sapUiTinyMarginEnd">
+								<m:Label text="Split"/>
+							</m:HBox>
+							<m:HBox width="60%">
+								<m:Text text="{tSDetailModel>/Split}"/>
+							</m:HBox>
+						</m:HBox>
+					</m:VBox>
+				</layout:VerticalLayout>
+			</m:FlexBox>
+		</headerContent>
+		<sections>
+			<ObjectPageSection titleUppercase="false" title="Stevedoring charge details">
+				<subSections>
+					<ObjectPageSubSection titleUppercase="false">
+						<blocks>
+							<m:FlexBox wrap="Wrap">
+								<layout:VerticalLayout class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop">
+									<m:VBox>
+										<t:Table rows="{ path: 'tSDetailModel>/ChargeDetails/results',filters: {path: 'ItmType', operator: 'EQ', value1: 'A'} }" visibleRowCount="5"
+											class="tableCard" selectionMode="None" ariaLabelledBy="title">
+											<t:columns>
+												<t:Column sortProperty="ETANo">
+													<m:Label wrapping="false" text="{i18n>Commodities}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Commodity}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="UOM"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>UOM}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>NoOfpackages}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>NoOfPacks}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>quantity}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Quantity}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>rate}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Rate}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>Amount}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Amount}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>Remark}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Remark}"/>
+													</t:template>
+												</t:Column>
+											</t:columns>
+										</t:Table>
+									</m:VBox>
+								</layout:VerticalLayout>
+							</m:FlexBox>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+			<ObjectPageSection titleUppercase="false" title="Handling charge details">
+				<subSections>
+					<ObjectPageSubSection titleUppercase="false">
+						<blocks>
+							<m:FlexBox wrap="Wrap">
+								<layout:VerticalLayout class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop">
+									<m:VBox>
+										<t:Table rows="{ path: 'tSDetailModel>/ChargeDetails/results',filters: {path: 'ItmType', operator: 'EQ', value1: 'B'} }" visibleRowCount="5"
+											class="tableCard" selectionMode="None" ariaLabelledBy="title">
+											<t:columns>
+												<t:Column sortProperty="ETANo">
+													<m:Label wrapping="false" text="{i18n>Commodities}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Commodity}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="UOM"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>UOM}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>NoOfpackages}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>NoOfPacks}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>quantity}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Quantity}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>rate}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Rate}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>Amount}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Amount}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>Remark}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Remark}"/>
+													</t:template>
+												</t:Column>
+											</t:columns>
+										</t:Table>
+									</m:VBox>
+								</layout:VerticalLayout>
+							</m:FlexBox>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+			<ObjectPageSection titleUppercase="false" title="Gear Supply charge details">
+				<subSections>
+					<ObjectPageSubSection titleUppercase="false">
+						<blocks>
+							<m:FlexBox wrap="Wrap">
+								<layout:VerticalLayout class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop">
+									<m:VBox>
+										<t:Table rows="{ path: 'tSDetailModel>/ChargeDetails/results',filters: {path: 'ItmType', operator: 'EQ', value1: 'C'} }" visibleRowCount="5"
+											class="tableCard" selectionMode="None" ariaLabelledBy="title">
+											<t:columns>
+												<t:Column sortProperty="ETANo">
+													<m:Label wrapping="false" text="{i18n>Commodities}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Commodity}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="UOM"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>UOM}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>quantity}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Quantity}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>rate}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Rate}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>Amount}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Amount}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>Remark}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Remark}"/>
+													</t:template>
+												</t:Column>
+											</t:columns>
+										</t:Table>
+									</m:VBox>
+								</layout:VerticalLayout>
+							</m:FlexBox>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+			<ObjectPageSection titleUppercase="false" title="Forklift charge details">
+				<subSections>
+					<ObjectPageSubSection titleUppercase="false">
+						<blocks>
+							<m:FlexBox wrap="Wrap">
+								<layout:VerticalLayout class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop">
+									<m:VBox>
+										<t:Table rows="{ path: 'tSDetailModel>/ChargeDetails/results',filters: {path: 'ItmType', operator: 'EQ', value1: 'D'} }" visibleRowCount="5"
+											class="tableCard" selectionMode="None" ariaLabelledBy="title">
+											<t:columns>
+												<t:Column sortProperty="ETANo">
+													<m:Label wrapping="false" text="Equipment"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Equipment}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="Shift"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Shift}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="Hatch No"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>HatchNo}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="Date"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Date}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="From"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>From}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="To"/>
+													<t:template>
+														<m:Text text="{delvryDetailsModel>To}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>rate}"/>
+													<t:template>
+														<m:Text text="{delvryDetailsModel>Rate}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>Amount}"/>
+													<t:template>
+														<m:Text text="{delvryDetailsModel>Amount}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>Remark}"/>
+													<t:template>
+														<m:Text text="{delvryDetailsModel>Remark}"/>
+													</t:template>
+												</t:Column>
+											</t:columns>
+										</t:Table>
+									</m:VBox>
+								</layout:VerticalLayout>
+							</m:FlexBox>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+			<ObjectPageSection titleUppercase="false" title="Crane charge details">
+				<subSections>
+					<ObjectPageSubSection titleUppercase="false">
+						<blocks>
+							<m:FlexBox wrap="Wrap">
+								<layout:VerticalLayout class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop">
+									<m:VBox>
+										<t:Table rows="{ path: 'tSDetailModel>/ChargeDetails/results',filters: {path: 'ItmType', operator: 'EQ', value1: 'E'} }" visibleRowCount="5"
+											class="tableCard" selectionMode="None" ariaLabelledBy="title">
+											<t:columns>
+												<t:Column sortProperty="ETANo">
+													<m:Label wrapping="false" text="Equipment"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Equipment}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="Shift"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Shift}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="Hatch No"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>HatchNo}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="Date"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Date}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="Weight"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Weight}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>rate}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Rate}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>Amount}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Amount}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>Remark}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Remark}"/>
+													</t:template>
+												</t:Column>
+											</t:columns>
+										</t:Table>
+									</m:VBox>
+								</layout:VerticalLayout>
+							</m:FlexBox>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+			<ObjectPageSection titleUppercase="false" title="Supplementary charge details">
+				<subSections>
+					<ObjectPageSubSection titleUppercase="false">
+						<blocks>
+							<m:FlexBox wrap="Wrap">
+								<layout:VerticalLayout class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop">
+									<m:VBox>
+										<t:Table rows="{ path: 'tSDetailModel>/ChargeDetails/results',filters: {path: 'ItmType', operator: 'EQ', value1: 'F'} }" visibleRowCount="5"
+											class="tableCard" selectionMode="None" ariaLabelledBy="title">
+											<t:columns>
+												<t:Column sortProperty="ETANo">
+													<m:Label wrapping="false" text="Supplementary Type"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>SuplymentryType}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="Shift"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Shift}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="Date"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Date}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="From"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>From}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="To"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>To}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>rate}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Rate}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>Amount}"/>
+													<t:template>
+														<m:Text text="{tSDetailModel>Amount}"/>
+													</t:template>
+												</t:Column>
+												<t:Column>
+													<m:Label text="{i18n>Remark}"/>
+													<t:template>
+														<m:Text text="{delvryDetailsModel>Remark}"/>
+													</t:template>
+												</t:Column>
+											</t:columns>
+										</t:Table>
+									</m:VBox>
+								</layout:VerticalLayout>
+							</m:FlexBox>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+	</ObjectPageLayout>
+</core:FragmentDefinition>

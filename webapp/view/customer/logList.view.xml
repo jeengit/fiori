@@ -1,0 +1,95 @@
+<mvc:View controllerName="com.demo.sharjahPort.controller.customer.logList" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" displayBlock="true"
+	xmlns:core="sap.ui.core" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:l="sap.ui.layout" xmlns:tnt="sap.tnt"
+	xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page id="logPage" showHeader="true" class="sapUiResponsiveContentPadding">
+		<customHeader>
+			<core:Fragment fragmentName="com.demo.sharjahPort.view.fragments.TopNav" type="XML"/>
+		</customHeader>
+		<content>
+			<VBox class="sapUiContentPadding tabfilter">
+				<Breadcrumbs currentLocationText="Log Sheet">
+					<Link href="#{= ${loginModel>/uRole} === 'HARBOR_MASTER' ? 'dashboardHarbour' : ${loginModel>/uRole} === 'CONTROL_ROOM' ? 'dashboard' :  ${loginModel>/uRole} === 'CARGO' ? 'dashboardManifest' : ''}" text="Home"/>
+				</Breadcrumbs>
+				<IconTabBar expandable="false" select="onBtnPress" class="sapUiResponsiveContentPadding">
+					<items>
+						<IconTabFilter count="{countModel>/0/count}" icon="sap-icon://request" iconColor="Positive" text="Pending"
+							key="PENDING/LOG"/>
+						<IconTabFilter count="{countModel>/1/count}" icon="sap-icon://approvals" iconColor="Critical"
+							text="Closed" key="CLOSED/LOG"/>
+					</items>
+				</IconTabBar>
+				<t:Table id="logTable" rows="{etaListModel>/results}" selectionMode="None" ariaLabelledBy="title"
+					class="card tableCard no-margin">
+					<t:extension>
+						<OverflowToolbar style="Clear">
+							<Title id="title" text="{i18n>LogSheet}"/>
+							<ToolbarSpacer/>
+							<core:Icon src="sap-icon://sorting-ranking" tooltip="{i18n>sort}" press="sortCategoriesAndName"/>
+							<core:Icon src="sap-icon://sort" tooltip="{i18n>SortCategories}" press="sortCategories"/>
+							<core:Icon src="sap-icon://decline" tooltip="{i18n>Clearallsortings}" press="clearAllSortings"/>
+						</OverflowToolbar>
+					</t:extension>
+					<t:columns>
+						<t:Column sortProperty="LogNumber">
+							<Label text="{i18n>LogNumber}"/>
+							<t:template>
+								<Link press="onETADetailsPress" text="{etaListModel>LogNumber}" wrapping="false"/>
+							</t:template>
+						</t:Column>
+						<t:Column sortProperty="PortCode" id="categories">
+							<Label text="{i18n>PortName}"/>
+							<t:template>
+								<Text text="{etaListModel>Portcode}"/>
+							</t:template>
+						</t:Column>
+						<t:Column>
+							<Label text="{i18n>Status}"/>
+							<t:template>
+								<tnt:InfoLabel class="sapUiTinyMarginTop" text="{etaListModel>Status}" displayOnly="true"
+									colorScheme="{= ${etaListModel>Status} === 'NEW' ? 8 : 3 }"/>
+							</t:template>
+						</t:Column>
+						<t:Column>
+							<Label text="{i18n>AgentName}"/>
+							<t:template>
+								<Text text="{etaListModel>AgentName}" wrapping="false"/>
+							</t:template>
+						</t:Column>
+						<t:Column>
+							<Label text="{i18n>VesselName}"/>
+							<t:template>
+								<Text text="{etaListModel>VesselName}" wrapping="false"/>
+							</t:template>
+						</t:Column>
+						<t:Column>
+							<Label text="{i18n>CustomsRefNo}"/>
+							<t:template>
+								<Text text="{etaListModel>IMONumber}" wrapping="false"/>
+							</t:template>
+						</t:Column>
+						<t:Column>
+							<Label text="{i18n>ETA}"/>
+							<t:template>
+								<HBox>
+									<!--<core:Icon color="#8c8a8a" src="sap-icon://calendar" tooltip="Expected Arrival Date"/>-->
+									<Text
+										text="{ path: 'etaListModel>etaDateTime', type: 'sap.ui.model.type.Date', formatOptions: {source: {pattern: 'dd/MM/yyyy'}, style: 'long'} }"
+										wrapping="false" class=" dateDisp"/>
+								</HBox>
+							</t:template>
+						</t:Column>
+						<t:Column>
+							<Label text="{i18n>ETD}"/>
+							<t:template>
+								<HBox>
+									<Text text="{ path: 'etaListModel>etdDateTime', type: 'sap.ui.model.type.Date', formatOptions: {source: {pattern: 'dd/MM/yyyy'}} }"
+										wrapping="false" class="dateDisp"/>
+								</HBox>
+							</t:template>
+						</t:Column>
+					</t:columns>
+				</t:Table>
+			</VBox>
+		</content>
+	</Page>
+</mvc:View>

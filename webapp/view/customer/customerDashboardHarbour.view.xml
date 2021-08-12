@@ -1,0 +1,261 @@
+<mvc:View controllerName="com.demo.sharjahPort.controller.customer.customerDashboardHarbour" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	displayBlock="true" xmlns:core="sap.ui.core" xmlns:t="sap.ui.table" xmlns:u="sap.ui.unified" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz="sap.viz.ui5.controls"
+	xmlns:viz.data="sap.viz.ui5.data" xmlns:unified="sap.ui.unified" xmlns:mi="sap.suite.ui.microchart"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page showHeader="true" class="sapUiResponsiveContentPadding harbourBoard">
+		<customHeader>
+			<core:Fragment fragmentName="com.demo.sharjahPort.view.fragments.TopNav" type="XML"/>
+		</customHeader>
+		<content>
+			<VBox class="section">
+				<Title text="{i18n>dashboard}" class="heading"/>
+				<FlexBox width="100%" class="sapUiSmallMarginTopBottom custTile">
+					<HBox width="20%" class="tileLayout sapUiSmallMarginEnd">
+						<GenericTile ariaLabel="NEW/ETA" press="handleListPress" header="{i18n>etaReq}" subheader="{i18n>subReq}">
+							<tileContent>
+								<TileContent>
+									<content>
+										<mi:ComparisonMicroChart minValue="0" maxValue="{= ${DashboardCountModel>/0/EtaRequest} > ${DashboardCountModel>/0/EtaApproved} ? 
+										${DashboardCountModel>/0/EtaRequest} : ${DashboardCountModel>/0/EtaApproved}}">
+											<mi:data>
+												<mi:ComparisonMicroChartData title="New" value="{DashboardCountModel>/0/EtaRequest}" color="#f5c11a"/>
+												<mi:ComparisonMicroChartData title="Approved" value="{DashboardCountModel>/0/EtaApproved}" color="Good"/>
+											</mi:data>
+										</mi:ComparisonMicroChart>
+									</content>
+								</TileContent>
+							</tileContent>
+						</GenericTile>
+					</HBox>
+					<HBox width="20%" class="tileLayout sapUiSmallMarginEnd">
+						<GenericTile ariaLabel="PENDING/LOG" press="handleListPress" header="Log Sheet Request" subheader="{i18n>subInProg}">
+							<tileContent>
+								<TileContent>
+									<content>
+										<mi:ComparisonMicroChart minValue="0" maxValue="{= ${DashboardCountModel>/0/LogsheetPending} > ${DashboardCountModel>/0/LogsheetClosed} ? 
+										${DashboardCountModel>/0/LogsheetPending} : ${DashboardCountModel>/0/LogsheetClosed}}">
+											<mi:data>
+												<mi:ComparisonMicroChartData title="Pending" value="{DashboardCountModel>/0/LogsheetPending}" color="#f5c11a"/>
+												<mi:ComparisonMicroChartData title="Closed" value="{DashboardCountModel>/0/LogsheetClosed}" color="Error"/>
+											</mi:data>
+										</mi:ComparisonMicroChart>
+									</content>
+								</TileContent>
+							</tileContent>
+						</GenericTile>
+					</HBox>
+					<HBox width="20%" class="tileLayout sapUiSmallMarginEnd">
+						<GenericTile ariaLabel="OPEN/HOTWORKS" press="handleListPress" header="{i18n>serReq}" subheader="{i18n>subServ}">
+							<tileContent>
+								<TileContent>
+									<content>
+										<mi:ComparisonMicroChart minValue="0" maxValue="{= ${DashboardCountModel>/0/OpenBOE} > ${DashboardCountModel>/0/ClosedBOE} ? 
+										${DashboardCountModel>/0/OpenBOE} : ${DashboardCountModel>/0/ClosedBOE}}">
+											<mi:data>
+												<mi:ComparisonMicroChartData title="New" value="{DashboardCountModel>/0/ServiceRequest}" color="#f5c11a"/>
+												<mi:ComparisonMicroChartData title="Approved" value="{DashboardCountModel>/0/ServiceApproved}" color="Good"/>
+											</mi:data>
+										</mi:ComparisonMicroChart>
+									</content>
+								</TileContent>
+							</tileContent>
+						</GenericTile>
+					</HBox>
+					<HBox width="40%" class="box-shadow">
+						<VBox width="100%">
+						<viz:Popover id="idPopOver"></viz:Popover>
+						<viz:VizFrame vizProperties="{ title: {text : 'Log Sheet', visible : true},plotArea:{ dataLabel:{visible: true,type:'value'} }}"
+							id="idVizFrame" uiConfig="{applicationSet:'fiori'}" height="170px" width="100%" vizType='donut'>
+							<viz:dataset>
+								<viz.data:FlattenedDataset data="{pieChartModel>/results}">
+									<viz.data:dimensions>
+										<viz.data:DimensionDefinition name="Status" value="{pieChartModel>status}"/>
+									</viz.data:dimensions>
+									<viz.data:measures>
+										<viz.data:MeasureDefinition name="Count" value="{pieChartModel>count}"/>
+									</viz.data:measures>
+								</viz.data:FlattenedDataset>
+							</viz:dataset>
+							<viz:feeds>
+								<viz.feeds:FeedItem uid="size" type="Measure" values="Count"/>
+								<viz.feeds:FeedItem uid="color" type="Dimension" values="Status"/>
+							</viz:feeds>
+						</viz:VizFrame>
+						</VBox>
+					</HBox>
+				</FlexBox>
+				<FlexBox width="100%" class="sapUiSmallMarginTopBottom">
+					<HBox width="100%" class="tileLayout">
+						<!--<FlexBox width="100%" justifyContent="End">-->
+						<!--	<core:Icon src="sap-icon://circle-task-2"/>-->
+						<!--</FlexBox>-->
+						<FlexBox alignContent="Center" class="box-shadow">
+							<PlanningCalendar id="PC1" startDate="{path: 'calenderSetModel>/startDate'}" rows="{path: 'calenderSetModel>/people'}"
+								appointmentsVisualization="Filled" appointmentSelect="handleAppointmentSelect" showEmptyIntervalHeaders="false" stickyHeader="true"
+								showWeekNumbers="true">
+								<toolbarContent>
+									<Title text="Planning Calender" titleStyle="H4"/>
+								</toolbarContent>
+								<rows>
+									<PlanningCalendarRow title="{calenderSetModel>name}"
+										appointments="{path : 'calenderSetModel>appointments', templateShareable: false}">
+										<appointments>
+											<unified:CalendarAppointment type="Type04" startDate="{calenderSetModel>start}" endDate="{calenderSetModel>end}"
+												text="{calenderSetModel>title}"></unified:CalendarAppointment>
+										</appointments>
+									</PlanningCalendarRow>
+								</rows>
+							</PlanningCalendar>
+						</FlexBox>
+					</HBox>
+				</FlexBox>
+			</VBox>
+			<!--<FlexBox class="section tabs" width="100%">-->
+			<!--	<HBox class="harbourList" width="20%">-->
+			<!--		<List headerText="ETA" mode="None"-->
+			<!--			items="{path: 'berthModel>/results',filters:[{path:'status',operator:'EQ',value1:'ETA'}]}">-->
+			<!--			<CustomListItem>-->
+			<!--				<FlexBox alignItems="Center">-->
+			<!--					<HBox justifyContent="Center" class="boxLeft" width="25%"><Text text="{berthModel>count}"/></HBox>-->
+			<!--					<HBox direction="Column" width="65%" class="sapUiTinyMargin">-->
+			<!--						<Text class="title" text="{berthModel>title}"/>-->
+			<!--						<Label class="desc" text="{berthModel>desc}"/>-->
+			<!--					</HBox>-->
+			<!--					<HBox class="sapUiTinyMarginEnd" justifyContent="End" width="10%"><core:Icon src="sap-icon://circle-task-2" color="{= ${berthModel>status} === 'completed' ? 'green' : 'red' }"/></HBox>-->
+			<!--				</FlexBox>-->
+			<!--			</CustomListItem>-->
+			<!--		</List>-->
+			<!--	</HBox>-->
+			<!--	<HBox class="harbourList" width="20%">-->
+			<!--		<List headerText="ANCHORAGE" mode="None"-->
+			<!--			items="{path: 'berthModel>/results',filters:[{path:'status',operator:'EQ',value1:'anchorage'}]}">-->
+			<!--			<CustomListItem>-->
+			<!--				<FlexBox alignItems="Center">-->
+			<!--					<HBox justifyContent="Center" class="boxLeft" width="25%"><Text text="{berthModel>count}"/></HBox>-->
+			<!--					<HBox direction="Column" width="65%" class="sapUiTinyMargin">-->
+			<!--						<Text class="title" text="{berthModel>title}"/>-->
+			<!--						<Label class="desc" text="{berthModel>desc}"/>-->
+			<!--					</HBox>-->
+			<!--					<HBox class="sapUiTinyMarginEnd" justifyContent="End" width="10%"><core:Icon src="sap-icon://circle-task-2" color="{= ${berthModel>status} === 'completed' ? 'green' : 'red' }"/></HBox>-->
+			<!--				</FlexBox>-->
+			<!--			</CustomListItem>-->
+			<!--		</List>-->
+			<!--	</HBox>-->
+			<!--	<HBox class="harbourList" width="20%">-->
+			<!--		<List headerText="PILOT &amp; TUG" mode="None"-->
+			<!--			items="{path: 'berthModel>/results',filters:[{path:'status',operator:'EQ',value1:'pilotTug'}]}">-->
+			<!--			<CustomListItem>-->
+			<!--				<FlexBox alignItems="Center">-->
+			<!--					<HBox justifyContent="Center" class="boxLeft" width="25%"><Text text="{berthModel>count}"/></HBox>-->
+			<!--					<HBox direction="Column" width="65%" class="sapUiTinyMargin">-->
+			<!--						<Text class="title" text="{berthModel>title}"/>-->
+			<!--						<Label class="desc" text="{berthModel>desc}"/>-->
+			<!--					</HBox>-->
+			<!--					<HBox class="sapUiTinyMarginEnd" justifyContent="End" width="10%"><core:Icon src="sap-icon://circle-task-2" color="{= ${berthModel>status} === 'completed' ? 'green' : 'red' }"/></HBox>-->
+			<!--				</FlexBox>-->
+			<!--			</CustomListItem>-->
+			<!--		</List>-->
+			<!--	</HBox>-->
+			<!--	<HBox class="harbourList" width="20%">-->
+			<!--		<List headerText="BERTHING" mode="None"-->
+			<!--			items="{path: 'berthModel>/results',filters:[{path:'status',operator:'EQ',value1:'berthing'}]}">-->
+			<!--			<CustomListItem>-->
+			<!--				<FlexBox alignItems="Center">-->
+			<!--					<HBox justifyContent="Center" class="boxLeft" width="25%"><Text text="{berthModel>count}"/></HBox>-->
+			<!--					<HBox direction="Column" width="65%" class="sapUiTinyMargin">-->
+			<!--						<Text class="title" text="{berthModel>title}"/>-->
+			<!--						<Label class="desc" text="{berthModel>desc}"/>-->
+			<!--					</HBox>-->
+			<!--					<HBox class="sapUiTinyMarginEnd" justifyContent="End" width="10%"><core:Icon src="sap-icon://circle-task-2" color="{= ${berthModel>status} === 'completed' ? 'green' : 'red' }"/></HBox>-->
+			<!--				</FlexBox>-->
+			<!--			</CustomListItem>-->
+			<!--		</List>-->
+			<!--	</HBox>-->
+			<!--	<HBox class="harbourList" width="20%">-->
+			<!--		<List headerText="DEPARTURE" mode="None"-->
+			<!--			items="{path: 'berthModel>/results',filters:[{path:'status',operator:'EQ',value1:'departure'}]}">-->
+			<!--			<CustomListItem>-->
+			<!--				<FlexBox alignItems="Center">-->
+			<!--					<HBox justifyContent="Center" class="boxLeft" width="25%"><Text text="{berthModel>count}"/></HBox>-->
+			<!--					<HBox direction="Column" width="65%" class="sapUiTinyMargin">-->
+			<!--						<Text class="title" text="{berthModel>title}"/>-->
+			<!--						<Label class="desc" text="{berthModel>desc}"/>-->
+			<!--					</HBox>-->
+			<!--					<HBox class="sapUiTinyMarginEnd" justifyContent="End" width="10%"><core:Icon src="sap-icon://circle-task-2" color="{= ${berthModel>status} === 'completed' ? 'green' : 'red' }"/></HBox>-->
+			<!--				</FlexBox>-->
+			<!--			</CustomListItem>-->
+			<!--		</List>-->
+			<!--	</HBox>-->
+			<!--</FlexBox>-->
+			<!--<VBox class="section sapUiSmallMarginTopBottom">-->
+			<!--	<FlexBox width="100%">-->
+			<!--		<HBox width="20%">-->
+			<!--			<FlexBox width="100%" class="sapUiSmallMarginEnd card tableCard">-->
+			<!--				<Title class="sapUiSmallMarginTopBottom" text="VESSELS"/>-->
+			<!--				</FlexBox>-->
+			<!--		</HBox>-->
+			<!--		<HBox width="20%">-->
+			<!--		<FlexBox width="100%" class="sapUiSmallMarginEnd card tableCard">-->
+			<!--				<Title text="BERTH AVAILABILITY"/>-->
+			<!--				</FlexBox>-->
+			<!--			</HBox>-->
+			<!--		<HBox width="25%">-->
+			<!--			<t:Table class="sapUiSmallMarginEnd card tableCard" rows="{pilotTugTable>/results}" selectionMode="None" visibleRowCount="3" paste="onPaste"-->
+			<!--				ariaLabelledBy="title">-->
+			<!--				<t:extension>-->
+			<!--					<OverflowToolbar style="Clear">-->
+			<!--						<Title text="PILOT &amp; TUGS"/>-->
+			<!--					</OverflowToolbar>-->
+			<!--				</t:extension>-->
+			<!--				<t:columns>-->
+			<!--					<t:Column>-->
+			<!--						<Label text="Vessel"/>-->
+			<!--						<t:template>-->
+			<!--							<Text text="{pilotTugTable>vessel}" wrapping="false"/>-->
+			<!--						</t:template>-->
+			<!--					</t:Column>-->
+			<!--					<t:Column>-->
+			<!--						<Label text="Status"/>-->
+			<!--						<t:template>-->
+			<!--							<Text text="{pilotTugTable>status}" wrapping="false"/>-->
+			<!--						</t:template>-->
+			<!--					</t:Column>-->
+			<!--				</t:columns>-->
+			<!--			</t:Table>-->
+			<!--		</HBox>-->
+			<!--		<HBox width="35%">-->
+			<!--			<t:Table class="card tableCard" rows="{pendReqTable>/results}" selectionMode="None" visibleRowCount="3" paste="onPaste"-->
+			<!--				ariaLabelledBy="title">-->
+			<!--				<t:extension>-->
+			<!--					<OverflowToolbar style="Clear">-->
+			<!--						<Title text="PENDING REQUESTS"/>-->
+			<!--					</OverflowToolbar>-->
+			<!--				</t:extension>-->
+			<!--				<t:columns>-->
+			<!--					<t:Column>-->
+			<!--						<Label text="Vessel"/>-->
+			<!--						<t:template>-->
+			<!--							<Text text="{pendReqTable>vessel}" wrapping="false"/>-->
+			<!--						</t:template>-->
+			<!--					</t:Column>-->
+			<!--					<t:Column>-->
+			<!--						<Label text="Agent"/>-->
+			<!--						<t:template>-->
+			<!--							<Text text="{pendReqTable>agent}" wrapping="false"/>-->
+			<!--						</t:template>-->
+			<!--					</t:Column>-->
+			<!--					<t:Column>-->
+			<!--						<Label text="Request Type"/>-->
+			<!--						<t:template>-->
+			<!--							<Text text="{pendReqTable>status}" wrapping="false"/>-->
+			<!--						</t:template>-->
+			<!--					</t:Column>-->
+			<!--				</t:columns>-->
+			<!--			</t:Table>-->
+			<!--		</HBox>-->
+			<!--	</FlexBox>-->
+			<!--</VBox>-->
+		</content>
+	</Page>
+</mvc:View>

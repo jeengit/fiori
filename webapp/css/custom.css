@@ -1,0 +1,134 @@
+.add-charge-row-class {
+	float:right;
+	/*color: #333;*/
+	/*font-size: .825rem;*/
+}
+
+/*.add-charge-row-class .sapMBtnInner {*/
+/*	height:1.3rem;*/
+/*	background-color: #f3d2d5;*/
+/*}*/
+
+/*.add-charge-row-class .sapMBtnInner .sapMBtnContent, .add-charge-row-class .sapMBtnInner .sapMBtnIcon {*/
+/*	line-height:1.125rem;*/
+/*	color: #333;*/
+/*	border: none !important;*/
+/*}*/
+.vsl-side-vbox {
+
+}
+
+.vsl-side-hbox {
+	margin: 16px 0px;
+}
+
+.vsl-side-labl {
+	margin-right: 8px;
+	min-width: 114px;
+	font-size: 16px;
+	font-weight: 400;
+}
+
+.vsl-side-value {
+	font-color:#32363a;
+	font-size: 16px;
+	font-weight: 700;
+}
+.input-vl-lbl {
+	margin-top: 24px;
+}
+
+.right-side-bar-vsl {
+	margin-left: 1rem;
+}
+/*
+.cardList li {
+    width: calc(33.3% - 25px);
+}
+.cardList li:nth-child(5n) {
+	 width: calc(33.3% - 25px);
+	 margin: 0 1rem 1rem 0 !important;
+}
+
+.cardList li:nth-child(3n) {
+    width: 33.3%;
+} */
+/*.custTile .sapUiRespGridSpanL2 {*/
+/*	    width: calc(17.666666666666668%) !important;*/
+/*}*/
+.vsl-side-vbox {
+		padding: 10px 16px;
+}
+.input-vsl-class .sapMInputBaseContentWrapper {
+	border: none;
+	border-bottom: 1px solid #89919a;
+}
+
+.select-vsl-class {
+		border: none;
+	border-bottom: 1px solid #89919a;
+	width: 100% !important;
+}
+.sel-hbox .sapMFlexItem {
+	width: 100% !important;
+}
+.inp-hbox2 {
+	margin-top: -8px;
+}
+
+.inp-hbox1 {
+	margin-top: 2px;
+}
+.cardList ul {
+	width:100%;
+}
+
+.boxLeft[data-bertstatus-occupied], .popup-common-hd[data-bertstatusdetails-occupied] .sapMDialogTitle .sapMHeader-CTX {
+	background-color: #fb8e8e !important;
+}
+
+
+.boxLeft[data-bertstatus-estimated], .popup-common-hd[data-bertstatusdetails-estimated] .sapMDialogTitle .sapMHeader-CTX {
+	background-color: #fbc767 !important;
+}
+
+
+.boxLeft[data-bertstatus-available], .popup-common-hd[data-bertstatusdetails-available] .sapMDialogTitle .sapMHeader-CTX {
+	background-color: #aaffaa !important;
+}
+
+.berth-stats-vbox-main {
+	padding: 10px 20px;
+}
+
+.bs-in-hbox-class {
+	padding: 6px 0px;
+}
+.bs-detail-lbl {
+	margin-right: 6px;
+}
+.b-status-det-icon {
+	margin-left: 5px;
+}
+
+.boxLeft {
+    padding: 1.6rem 0.6rem;
+}
+
+.notf-harbor-popup-class .sapMPopoverScroll {
+	padding: 0px !important;
+}
+.har-notf-hbox {
+	    padding: 15px 10px 4px 10px;
+}
+
+.har-notf-time-hbox {
+	 padding: 3px 10px 15px 10px;
+}
+.time-ago-class {
+		 color: #908686;
+}
+.badge-harbour-noty-btn .sapMBadgeIndicator {
+	margin-top: 6px;
+    margin-right: 6px;
+}
